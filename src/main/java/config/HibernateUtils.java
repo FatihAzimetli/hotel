@@ -15,7 +15,7 @@ public class HibernateUtils {
     static{
         try {
             Configuration config = new Configuration().
-                    configure("hibernate.cfg.xml").
+                    configure("hibernate.cfg.xml"). //parametre zorunlu degil ancak baska bir isim olursa zorunlu
                     addAnnotatedClass(Hotel.class).
                     addAnnotatedClass(Room.class).
                     addAnnotatedClass(Reservation.class).
