@@ -15,11 +15,11 @@ public class HibernateUtils {
     static{
         try {
             Configuration config = new Configuration().
-                    configure("hibernate.cfg.xml"). //parametre zorunlu degil ancak baska bir isim olursa zorunlu
-                    addAnnotatedClass(Hotel.class).
-                    addAnnotatedClass(Room.class).
-                    addAnnotatedClass(Reservation.class).
-                    addAnnotatedClass(Guest.class);
+                    configure("hibernate.cfg.xml").//parametre zorunlu değil
+                            addAnnotatedClass(Hotel.class).
+                    addAnnotatedClass(Room.class);
+            //  addAnnotatedClass(Reservation.class).
+            //  addAnnotatedClass(Guest.class);
 
             sessionFactory = config.buildSessionFactory();
         }catch (Exception e){
@@ -46,3 +46,4 @@ public class HibernateUtils {
 
 
 }
+

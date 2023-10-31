@@ -1,40 +1,36 @@
 package domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "t_hotel")//opsiyonel
-public class Hotel {
+public class Hotel {//one
 
     @Id
-    private Long id;
+    private Long id;//11
 
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String location;
 
-    //TODO: one-to-many
-    private List<Room> rooms=new ArrayList<>();
+    @OneToMany(mappedBy = "hotel",fetch = FetchType.EAGER)//3. tablo oluşturma
+    private List<Room> rooms=new ArrayList<>();//A101
 
     //fetch için hibernate default const kullanır.
     public Hotel() {
     }
 
     //param const
-    public Hotel(Long id, String name, String location, List<Room> rooms) {
+    public Hotel(Long id, String name, String location) {
         this.id = id;
         this.name = name;
         this.location = location;
-        this.rooms = rooms;
     }
 
-        //getter-setter
+    //getter-setter
 
 
     public Long getId() {
@@ -69,7 +65,7 @@ public class Hotel {
         this.rooms = rooms;
     }
 
-        //toString
+    //toString
 
     @Override
     public String toString() {

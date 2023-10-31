@@ -1,14 +1,23 @@
 package controller;
 
 import config.HibernateUtils;
+import repository.HotelRepository;
+import repository.RoomRepository;
+import service.HotelService;
+import service.RoomService;
 
 import java.util.Scanner;
 
-public class HotelManagementSystems {
+public class HotelManagementSystem {
 
     private static Scanner scanner=new Scanner(System.in);
 
     public static void displayMenuHotelManagementSystem(){
+        HotelRepository hotelRepository=new HotelRepository();
+        HotelService hotelService=new HotelService(hotelRepository);
+
+        RoomRepository roomRepository=new RoomRepository();
+        RoomService roomService=new RoomService(roomRepository,hotelService);
 
         boolean exit=false;
 
@@ -26,10 +35,10 @@ public class HotelManagementSystems {
 
             switch (choice){
                 case 1:
-                    displayHotelOperationsMenu();
+                    displayHotelOperationsMenu(hotelService);
                     break;
                 case 2:
-                    displayRoomOperationsMenu();
+                    displayRoomOperationsMenu(roomService);
                     break;
                 case 3:
                     displayGuestOperationsMenu();
@@ -51,7 +60,8 @@ public class HotelManagementSystems {
     }
 
     //hotel operations
-    private static void displayHotelOperationsMenu() {
+    private static void displayHotelOperationsMenu(HotelService hotelService) {
+
         System.out.println("HotelOperationMenu");
 
         boolean exit = false;
@@ -70,16 +80,22 @@ public class HotelManagementSystems {
 
             switch (choice) {
                 case 1:
-
+                    //save hotel
+                    hotelService.saveHotel();
                     break;
                 case 2:
-
+                    //find hotel
+                    System.out.println("Enter hotel ID: ");
+                    Long id= scanner.nextLong();
+                    scanner.nextLine();
+                    hotelService.findHotelById(id);
                     break;
                 case 3:
 
                     break;
                 case 4:
-
+                    //get all hotels
+                    hotelService.findAllHotels();
                     break;
                 case 5:
 
@@ -96,7 +112,7 @@ public class HotelManagementSystems {
     }
 
     //room operations
-    private static void displayRoomOperationsMenu() {
+    private static void displayRoomOperationsMenu(RoomService roomService) {
         System.out.println("RoomOperationMenu");
         boolean exit = false;
         while (!exit) {
@@ -113,6 +129,8 @@ public class HotelManagementSystems {
 
             switch (choice) {
                 case 1:
+                    //save room
+                    roomService.saveRoom();
                     break;
                 case 2:
                     break;
@@ -205,6 +223,13 @@ public class HotelManagementSystems {
 
 
     }
+
+
+
+
+
+
+
 
 
 }
