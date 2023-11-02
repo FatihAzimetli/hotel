@@ -8,6 +8,7 @@ import java.util.List;
 @Table(name = "t_hotel")//opsiyonel
 public class Hotel {//one
 
+
     @Id
     private Long id;//11
 
@@ -16,7 +17,7 @@ public class Hotel {//one
     @Column(nullable = false)
     private String location;
 
-    @OneToMany(mappedBy = "hotel",fetch = FetchType.EAGER)//3. tablo oluşturma
+    @OneToMany(mappedBy = "hotel",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)//3. tablo oluşturma
     private List<Room> rooms=new ArrayList<>();//A101
 
     //fetch için hibernate default const kullanır.

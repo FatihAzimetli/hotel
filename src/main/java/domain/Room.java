@@ -20,8 +20,15 @@ public class Room {//many(hotel)
     @JoinColumn(name = "hotel_id",nullable = false)//opsiyonel
     private Hotel hotel;//11 idli
 
-    //TODO: one-to-many
-//    private List<Reservation> reservations=new ArrayList<>();
+    //OneToMany ilişkide 1 obje Çok(many) obje ile ilişkili old.
+    //ilişki tek sütunda kurulamaz.
+    // OneToMany ann. ilişkinin kurulması için
+    // tek bir sütun(FK) yeterli olmadığından 3. tablo oluşturur.
+    //Çift yönlü OnetoMany-ManyToOne kullanılmışsa
+    //ManyToOne tarafında ilişki kurulur.
+    //OneToManyde sadece değerler maplenir.
+    @OneToMany(mappedBy = "room",orphanRemoval = true,fetch = FetchType.EAGER)
+    private List<Reservation> reservations=new ArrayList<>();
 
     //default const
     public Room() {
@@ -70,13 +77,13 @@ public class Room {//many(hotel)
         this.hotel = hotel;
     }
 
-/*    public List<Reservation> getReservations() {
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
-    }*/
+    }
 
     //toString
     @Override

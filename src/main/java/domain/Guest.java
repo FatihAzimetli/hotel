@@ -11,6 +11,7 @@ import java.util.List;
 public class Guest {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -20,8 +21,8 @@ public class Guest {
 
     private LocalDateTime createDate;
 
-    //TODO:reservationdan maplenecek
-    @OneToMany
+
+    @OneToMany(mappedBy = "guest",orphanRemoval = true)
     private List<Reservation> reservations=new ArrayList<>();
 
     @PrePersist
@@ -31,10 +32,6 @@ public class Guest {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -57,9 +54,6 @@ public class Guest {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
 
     public List<Reservation> getReservations() {
         return reservations;
